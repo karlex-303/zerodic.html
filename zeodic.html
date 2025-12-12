@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zodiac Info by Wahshi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0d0d0d;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .card {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      width: 400px;
+      box-shadow: 0 0 18px rgba(255,255,255,0.08);
+    }
+    input, button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 15px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+    input {
+      background: #333;
+      color: #fff;
+    }
+    input::placeholder { color: #888; }
+    button {
+      background: #ff7b00;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover { background: #e66d00; }
+    h1 {
+      position: absolute;
+      top: 40px;
+      width: 100%;
+      font-size: 32px;
+      color: #ff7b00;
+      text-shadow: 0 0 8px rgba(255,120,0,0.5);
+    }
+    p { text-align: justify; line-height: 1.5em; }
+  </style>
+</head>
+<body>
+
+  <h1>Website Created by Wahshi</h1>
+
+  <div id="page1" class="card">
+    <h2>Enter Your Name</h2>
+    <input type="text" id="name" placeholder="Your Name" />
+    <button onclick="goToPage2()">Next</button>
+  </div>
+
+  <div id="page2" class="card" style="display:none;">
+    <h2>Hello <span id="nameShow"></span>!</h2>
+    <input type="number" id="age" placeholder="Your Age" />
+    <button onclick="goToPage3()">Next</button>
+  </div>
+
+  <div id="page3" class="card" style="display:none;">
+    <h2>Enter Date of Birth</h2>
+    <input type="date" id="dob" />
+    <button onclick="showZodiac()">Show Zodiac Info</button>
+  </div>
+
+  <div id="page4" class="card" style="display:none;"></div>
+
+  <script>
+    function goToPage2() {
+      let name = document.getElementById('name').value.trim();
+      if (!name) return alert('Enter name!');
+      document.getElementById('nameShow').innerText = name;
+      page1.style.display = 'none';
+      page2.style.display = 'block';
+    }
+
+    function goToPage3() {
+      let age = document.getElementById('age').value.trim();
+      if (!age) return alert('Enter age!');
+      page2.style.display = 'none';
+      page3.style.display = 'block';
+    }
+
+    function getZodiac(month, day) {
+      if ((month==1 && day>=20) || (month==2 && day<=18)) return 'Aquarius';
+      if ((month==2 && day>=19) || (month==3 && day<=20)) return 'Pisces';
+      if ((month==3 && day>=21) || (month==4 && day<=19)) return 'Aries';
+      if ((month==4 && day>=20) || (month==5 && day<=20)) return 'Taurus';
+      if ((month==5 && day>=21) || (month==6 && day<=20)) return 'Gemini';
+      if ((month==6 && day>=21) || (month==7 && day<=22)) return 'Cancer';
+      if ((month==7 && day>=23) || (month==8 && day<=22)) return 'Leo';
+      if ((month==8 && day>=23) || (month==9 && day<=22)) return 'Virgo';
+      if ((month==9 && day>=23) || (month==10 && day<=22)) return 'Libra';
+      if ((month==10 && day>=23) || (month==11 && day<=21)) return 'Scorpio';
+      if ((month==11 && day>=22) || (month==12 && day<=21)) return 'Sagittarius';
+      return 'Capricorn';
+    }
+
+    const zodiacDescriptions = {
+      Aries: "You are full of energy and confidence today. Your mood is bright, and you may feel inspired to start new projects. Health-wise, your body is strong but remember to take breaks. Focus on balancing work and rest. To improve your day, channel your energy into creative or physical activities.",
+      Taurus: "Today is about stability and patience. You feel grounded and calm, but your mood may swing if things do not go as planned. Health is steady; a short walk or meditation can enhance your well-being. To improve, focus on steady progress and enjoy small pleasures.",
+      Gemini: "Your mood is lively and communicative. You feel social and curious today. Health is good, but mental fatigue is possible. Take breaks to refresh your mind. To improve your day, engage in learning, conversations, or sharing ideas.",
+      Cancer: "Emotions are strong today; you may feel protective of loved ones. Health is sensitive; pay attention to your diet and rest. To enhance your day, express your feelings and nurture relationships. Mindfulness can help balance your mood.",
+      Leo: "Your mood is bright and bold; you may attract attention naturally. Health is robust, but avoid overexertion. To improve your day, channel confidence into leadership or creative endeavors. Stay humble and focus on teamwork.",
+      Virgo: "Today is about precision and organization. Mood is thoughtful, analytical. Health may require attention to posture and digestion. To improve, plan your tasks carefully, maintain routines, and focus on self-discipline.",
+      Libra: "Your mood is harmonious and social. Relationships bring joy. Health is balanced but consider light exercise to maintain equilibrium. To improve, focus on fairness, beauty, and collaboration in interactions.",
+      Scorpio: "Intensity and passion guide your mood today. Health is fine, but stress can build up. Focus on deep thinking or creative pursuits. To improve, balance emotions, avoid impulsive decisions, and channel energy productively.",
+      Sagittarius: "Your mood is adventurous and optimistic. Health is generally good; outdoor activity is favorable. To improve your day, explore new experiences, learn something new, and embrace opportunities with open-mindedness.",
+      Capricorn: "Your mood is disciplined and focused. Health may require attention to back and bones. To improve, prioritize goals, maintain routines, and take small steps toward long-term achievements.",
+      Aquarius: "Your mood is inventive and independent. Health is stable; engage in mental stimulation. To improve, pursue new ideas, collaborate with like-minded people, and embrace creativity.",
+      Pisces: "Your mood is imaginative and sensitive. Health may be influenced by emotions; rest is important. To improve your day, meditate, engage in creative activities, and trust your intuition."
+    };
+
+    function showZodiac() {
+      let dob = document.getElementById('dob').value;
+      if (!dob) return alert('Select your date of birth!');
+
+      let d = new Date(dob);
+      let zodiac = getZodiac(d.getMonth()+1, d.getDate());
+      let description = zodiacDescriptions[zodiac];
+
+      page3.style.display = 'none';
+      page4.style.display = 'block';
+
+      page4.innerHTML = `
+        <h2>Your Zodiac Sign:</h2>
+        <h1 style="color:#ff7b00; font-size:40px;">${zodiac}</h1>
+        <p style="margin-top:20px; font-size:16px;">${description}</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
